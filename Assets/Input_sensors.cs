@@ -27,71 +27,79 @@ public class Input_sensors
         {
             return leftFromOrganism();
         }
+        else if(n == 4)
+        {
+            return distanceFromDown();
+        }
+        else if (n == 5)
+        {
+            return distanceFromTop();
+        }
+        else if (n == 6)
+        {
+            return distanceFromRight();
+        }
+        else if (n == 7)
+        {
+            return distanceFromLeft();
+        }
         return 0;
     }
 	public double downFromOrganism()
 	{
 		int y = loc.y;
-		int distance = 0;
-		double output = Globals.WORLD_SIZE;
+		int distance = Globals.WORLD_SIZE;
 		for (int i = y+1; i< Globals.WORLD_SIZE; i++)
 		{
-			if (Globals.world[loc.x, i] != null)
+			if (Globals.world[loc.x, i] != 0)
 			{
 				distance = i - y;
 				break;
 			}
 		}
-		if (distance == 0) { return 0.0; }
-		return (output - distance)/Globals.WORLD_SIZE;
+		return (Globals.WORLD_SIZE - distance)/Globals.WORLD_SIZE;
 	}
     public double upFromOrganism()
     {
         int y = loc.y;
-        int distance = 0;
-        double output = Globals.WORLD_SIZE;
+        int distance = Globals.WORLD_SIZE;
         for (int i = y - 1; i >= 0; i--)
         {
-            if (Globals.world[loc.x, i] != null)
+            if (Globals.world[loc.x, i] != 0)
             {
                 distance = y - i;
                 break;
             }
         }
-        if (distance == 0) { return 0.0; }
-        return (output - distance) / Globals.WORLD_SIZE;
+        return (Globals.WORLD_SIZE - distance) / Globals.WORLD_SIZE;
     }
     public double rightFromOrganism()
     {
         int x = loc.x;
-        int distance = 0;
-        double output = Globals.WORLD_SIZE;
+        int distance = Globals.WORLD_SIZE;
         for (int i = x + 1; i < Globals.WORLD_SIZE; i++)
         {
-            if (Globals.world[i, loc.y] != null)
+            if (Globals.world[i, loc.y] != 0)
             {
                 distance = i - x;
                 break;
             }
         }
-        if (distance == 0) { return 0.0; }
-        return (output - distance) / Globals.WORLD_SIZE;
+        return (Globals.WORLD_SIZE - distance) / Globals.WORLD_SIZE;
     }
     public double leftFromOrganism()
     {
         int x = loc.x;
-        int distance = 0;
-        double output = Globals.WORLD_SIZE;
+        int distance = Globals.WORLD_SIZE;
         for (int i = x - 1 ; i >= 0; i--)
         {
-            if (Globals.world[i, loc.y] != null)
+            if (Globals.world[i, loc.y] != 0)
             {
                 distance = x - i;
                 break;
             }
         }
-        if (distance == 0) { return 0.0; }
-        return (output - distance) / Globals.WORLD_SIZE;
+        return (Globals.WORLD_SIZE - distance) / Globals.WORLD_SIZE;
     }
     public double distanceFromLeft()
     {

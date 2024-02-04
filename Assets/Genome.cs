@@ -3,14 +3,15 @@ using System;
 
 public class Gene
 {
-	public String [] gene = new string[Globals.GeneLength];
+	public String gene = "";
 	public String binaryGene = "";
 	public Gene()
 	{
 		for (int i = 0; i < Globals.GeneLength; i++)
 		{
-			gene[i] = generateHexCode();
-			binaryGene += Convert.ToString(Convert.ToInt32(gene[i], 16), 2);
+			String singleHex = generateHexCode();
+			gene += singleHex;
+			binaryGene += Convert.ToString(Convert.ToInt32(singleHex, 16), 2);
 		}
 	}
 
