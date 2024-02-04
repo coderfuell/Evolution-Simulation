@@ -31,12 +31,14 @@ public class Gene
 
 public class Genome
 {
-	public Gene [] genome = new Gene[Globals.GenomeLength];
+	public Gene [] geneList = new Gene[Globals.GenomeLength];
 	public Genome()
 	{
 		for (int i = 0;i < Globals.GenomeLength;i++)
 		{
-			genome[i] = new Gene();
+			geneList[i] = new Gene();
 		}
 	}
+
+
 }

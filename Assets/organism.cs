@@ -8,6 +8,7 @@ public class Organism
     public Output_sensors output;
     public Genome genome;
     public NeuralNet brain;
+    public String color;
 
     public Organism()
     {
@@ -16,6 +17,7 @@ public class Organism
 
         input = new Input_sensors(this);
         output = new Output_sensors(this);
+        genome = new Genome();
         brain = new NeuralNet(this);
     }
 }
