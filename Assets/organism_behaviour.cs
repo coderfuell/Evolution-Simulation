@@ -36,7 +36,7 @@ public class Organism_behaviour : MonoBehaviour
             Globals.displayWorld.Add(Instantiate(prefab, new Vector2(x, y), Quaternion.identity));
 
             Globals.organisms[i].brain.callOutputNeuron();
-            Destroy(Globals.displayWorld[i], Time.deltaTime*3);
+            Destroy(Globals.displayWorld[i], Time.deltaTime*1);
         }
         Globals.displayWorld.Clear();
     }

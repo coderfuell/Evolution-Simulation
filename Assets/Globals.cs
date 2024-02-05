@@ -5,7 +5,7 @@ using UnityEngine;
 public static class Globals
 {
     public static int WORLD_SIZE = 128;
-    public static int numberOfOrganisms = 1000;
+    public static int numberOfOrganisms = 1;
     public static int numberOfInputSensors = 8;
     public static int numberOfOutputSensors = 4;
     public static int numberOfInternalNeurons = 2;
