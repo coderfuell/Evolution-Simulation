@@ -8,12 +8,12 @@ using Unity.VisualScripting.FullSerializer;
 public class NeuralNet
 {
 	Organism organism;
-	Random rand;
+	System.Random rand;
 	int n;
 	public NeuralNet(Organism org)
 	{
 		this.organism = org;
-		rand = new Random();
+		rand = new System.Random();
 		n = rand.Next();
 	}
 
@@ -23,9 +23,10 @@ public class NeuralNet
 		return 0;
 	}
 
-	public int callOutputNeuron()
+	public int processOutput()
 	{
-		organism.output.callOutput(rand.Next());
+		if (Globals.probabilityFunction(1) > 0)
+		{ organism.output.callOutput(0); }
 		return 0;
 	}
 }
@@ -63,7 +64,6 @@ public class NeuralNet
 	public NeuralNet(Organism org)
 	{
 		this.org = org;
-		org.color = org.genome.geneList[0].gene;
 		for (int i = 0;i<Globals.numberOfInternalNeurons; i++)
 		{
 			internalNeurons[i] = new InternalNeuron();
@@ -133,7 +133,7 @@ public class NeuralNet
 
 	void processGenome()
 	{
-		for (int i = 1;i<Globals.GenomeLength;i++)
+        for (int i = 1;i<Globals.GenomeLength;i++)
 		{
 			processGene(org.genome.geneList[i]);
 		}
@@ -153,12 +153,13 @@ public class NeuralNet
 			}
 		}
 		max = Math.Tanh(max);
-		if (Globals.probabilityFunction(max))
+		if (Globals.probabilityFunction(max) > 0)
 		{
 			org.output.callOutput(maxIndex);
 		}
 	}
 
 }
+
 
 
