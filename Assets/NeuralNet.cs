@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine;
+using Unity.VisualScripting.FullSerializer;
 
 /*
 public class NeuralNet
@@ -39,7 +41,13 @@ public class InternalNeuron
 
 	public double giveOutput()
 	{
-		return 0;
+		if (numberOfInputs == 0) return 0;
+		double sum = 0;
+		for (int i = 0; i< numberOfInputs; i++)
+		{
+			sum += inputs[i];
+		}
+		return Math.Tanh(sum);
 	}
 }
 
@@ -56,6 +64,10 @@ public class NeuralNet
 	{
 		this.org = org;
 		org.color = org.genome.geneList[0].gene;
+		for (int i = 0;i<Globals.numberOfInternalNeurons; i++)
+		{
+			internalNeurons[i] = new InternalNeuron();
+		}
 	}
 
 	void createConnectionInput_InternalNeuron(int sourceID, int sinkID, double connectionWeight)
@@ -76,12 +88,13 @@ public class NeuralNet
 	{
 		double connectionValue = org.input.callInput(sourceID) * connectionWeight;
 		outputs[sinkID % Globals.numberOfOutputSensors] = connectionValue;
-	}
+    }
 
 	void createConnectionInternalNeuron_Output(int sourceID, int sinkID, double connectionWeight)
 	{
-
-	}
+		double connectionValue = internalNeurons[sourceID % Globals.numberOfInternalNeurons].giveOutput() * connectionWeight;
+		outputs[sinkID % Globals.numberOfOutputSensors] = connectionValue;
+    }
 
 
 	public void processGene(Gene gene)
@@ -93,7 +106,7 @@ public class NeuralNet
 		int sinkID = gene.getIntValue(7, 5);
 
 		int connectionSign = gene.getIntValue(12, 1) * (-1);
-		double connectionWeight = connectionSign * (gene.getIntValue(13, 11) / 2048);
+		double connectionWeight = connectionSign * (gene.getIntValue(13, 11) / 1024);
 
 		if (sinkType == 1)
 		{
@@ -105,6 +118,47 @@ public class NeuralNet
                 createConnectionInternalNeuron_InternalNeuron(sourceID, sinkID, connectionWeight);
             }
 		}
+		else if (sinkType == 0)
+		{
+			if (sourceType == 0)
+			{
+				createConnectionInput_Output(sourceID, sinkID, connectionWeight);
+			}
+			else if (sourceType == 1)
+			{
+				createConnectionInternalNeuron_Output(sourceID, sinkID, connectionWeight);
+			}
+		}
+	}
+
+	void processGenome()
+	{
+		for (int i = 1;i<Globals.GenomeLength;i++)
+		{
+			processGene(org.genome.geneList[i]);
+		}
+	}
+
+	public void processOutput()
+	{
+		processGenome();
+		double max = 0;
+		int maxIndex = -1;
+		for (int i = 0;i<Globals.numberOfOutputSensors;i++)
+		{
+            if (outputs[i] >  max)
+			{
+				max = outputs[i];
+				maxIndex = i;
+			}
+		}
+		max = Math.Tanh(max);
+		if (Globals.probabilityFunction(max))
+		{
+			org.output.callOutput(maxIndex);
+		}
 	}
 
 }
+
+

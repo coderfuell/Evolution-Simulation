@@ -11,7 +11,7 @@ public class Organism_behaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 20;
+        Application.targetFrameRate = Globals.FrameRate;
         transform.localScale = new Vector2(Globals.WORLD_SIZE, Globals.WORLD_SIZE);
         transform.localPosition = new Vector2((Globals.WORLD_SIZE - 1) / 2, (Globals.WORLD_SIZE - 1) / 2);
         cam.orthographicSize = Globals.WORLD_SIZE / 2;
@@ -35,7 +35,7 @@ public class Organism_behaviour : MonoBehaviour
             (float x, float y) = (Globals.organisms[i].loc.x ,Globals.WORLD_SIZE - Globals.organisms[i].loc.y - 1);
             Globals.displayWorld.Add(Instantiate(prefab, new Vector2(x, y), Quaternion.identity));
 
-            Globals.organisms[i].brain.callOutputNeuron();
+            Globals.organisms[i].brain.processOutput();
             Destroy(Globals.displayWorld[i], Time.deltaTime*1);
         }
         Globals.displayWorld.Clear();

@@ -1,5 +1,5 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
+using UnityEngine;
 
 public class Gene
 {
@@ -11,13 +11,13 @@ public class Gene
 		{
 			String singleHex = generateHexCode();
 			gene += singleHex;
-			binaryGene += Convert.ToString(Convert.ToInt32(singleHex, 16), 2);
+			binaryGene += Convert.ToString(Convert.ToInt32(singleHex, 16), 2).PadLeft(4, '0');
 		}
 	}
 
 	public String generateHexCode()
 	{
-		Random rand = new Random();
+		System.Random rand = new System.Random();
 		int n = rand.Next(0, 16);
 		return n.ToString("X");
 	}
