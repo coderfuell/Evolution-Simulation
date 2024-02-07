@@ -4,8 +4,9 @@ using UnityEngine;
 
 public static class Globals
 {
-    public static int FrameRate = 120;
+    public static int FrameRate = 100;
     public static int WORLD_SIZE = 128;
+    public static int stepsPerGeneration = 100;
     public static int numberOfOrganisms = 1000;
     public static int numberOfInputSensors = 8;
     public static int numberOfOutputSensors = 4;
@@ -23,5 +24,11 @@ public static class Globals
             return 1;
         }
         return 0;
+    }
+    public static void setWorldtoZero()
+    {
+        for (int i = 0; i < Globals.WORLD_SIZE; i++)
+            for (int j = 0; j < Globals.WORLD_SIZE; j++)
+                Globals.world[i, j] = 0;
     }
 }

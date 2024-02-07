@@ -17,9 +17,10 @@ public class Cords
 			//If the space is null in the world matrix at the location of a & b,
 			//the loc is set to the a, b values.
 			if (Globals.world[x, y] == 0)
-			{
-				break;
-			}
+            {
+                Globals.world[x, y] = 1;
+                break;
+            }
 		}
        
 	}

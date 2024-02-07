@@ -106,7 +106,7 @@ public class NeuralNet
 		int sinkID = gene.getIntValue(7, 5);
 
 		int connectionSign = gene.getIntValue(12, 1) * (-1);
-		double connectionWeight = connectionSign * (gene.getIntValue(13, 11) / 1024);
+		double connectionWeight = connectionSign * ((float)gene.getIntValue(13, 11) / 2048);
 
 		if (sinkType == 1)
 		{
