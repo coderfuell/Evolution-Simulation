@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Survival
@@ -30,16 +31,22 @@ public class Survival
 
         Globals.setWorldtoZero();
 
-        for (int i = 0; i < Globals.organisms.Count; i++)
-        {
-            Globals.organisms[i].loc = new Cords();
-        }
+        List<Organism> children = new List<Organism>();
 
-        int k = Globals.numberOfOrganisms;
         int p = Globals.organisms.Count;
-        for (int i = 0; i < k - p; i++)
+        for (int i = 0; i < Globals.numberOfOrganisms; i++)
         {
-            Globals.organisms.Add(Globals.organisms[i % p].getChild());
+            children.Add(Globals.organisms[i % p].getChild());
         }
+        for (int i = 0;i < p;i++)
+        {
+            GameObject.Destroy(Globals.organisms[i].prefab);
+        }
+        Globals.organisms.Clear();
+        for (int i = 0;i < Globals.numberOfOrganisms;i++)
+        {
+            Globals.organisms.Add(children[i]);
+        }
+        children.Clear();
     }
 }

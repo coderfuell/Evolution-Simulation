@@ -4,36 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Unity.VisualScripting.FullSerializer;
 
-/*
-public class NeuralNet
-{
-	Organism organism;
-	System.Random rand;
-	int n;
-	public NeuralNet(Organism org)
-	{
-		this.organism = org;
-		rand = new System.Random();
-		n = rand.Next();
-	}
-
-	public int callInputNeuron()
-	{
-		organism.input.callInput(n);
-		return 0;
-	}
-
-	public int processOutput()
-	{
-		if (Globals.probabilityFunction(1) > 0)
-		{ organism.output.callOutput(0); }
-		return 0;
-	}
-}
-*/
-
-
-
 public class InternalNeuron
 {
 	public int numberOfInputs = 0;

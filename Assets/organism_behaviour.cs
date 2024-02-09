@@ -38,9 +38,10 @@ public class Organism_behaviour : MonoBehaviour
     {
         for (int i = 0;i < Globals.numberOfOrganisms;i++)
         {
-            (float x, float y) = (Globals.organisms[i].loc.x ,Globals.WORLD_SIZE - Globals.organisms[i].loc.y - 1);
             Globals.organisms[i].brain.processOutput();
+            (float x, float y) = (Globals.organisms[i].loc.x, Globals.WORLD_SIZE - Globals.organisms[i].loc.y - 1);
             Globals.organisms[i].prefab.transform.position = new Vector3(x, y, 0);
+            //Globals.organisms[i].genome.mutation();
         }
         nextGen++;
         if (nextGen > Globals.stepsPerGeneration)

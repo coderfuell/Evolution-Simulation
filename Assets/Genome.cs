@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
 using UnityEngine;
-
 public class Gene
 {
 	public String gene = "";
@@ -40,5 +40,18 @@ public class Genome
 		}
 	}
 
+	public void mutation()
+	{
+		System.Random rand = new System.Random();
+		int geneIndex = rand.Next(geneList.Length);
+		int bitIndex = rand.Next(Globals.GeneLength * 4);
+
+		int n = (int)geneList[geneIndex].binaryGene[bitIndex];
+		n -= 48;
+		n = 1 - n;
+		UnityEngine.Debug.Log(n);
+        //geneList[geneIndex].binaryGene[bitIndex] = (char)n;
+
+    }
 
 }
