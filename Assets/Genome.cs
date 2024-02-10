@@ -46,12 +46,17 @@ public class Genome
 		int geneIndex = rand.Next(geneList.Length);
 		int bitIndex = rand.Next(Globals.GeneLength * 4);
 
-		int n = (int)geneList[geneIndex].binaryGene[bitIndex];
-		n -= 48;
-		n = 1 - n;
-		UnityEngine.Debug.Log(n);
-        //geneList[geneIndex].binaryGene[bitIndex] = (char)n;
-
+		String n = geneList[geneIndex].binaryGene.Substring(bitIndex, 1);
+		if (n == "1")
+		{
+			n = "0";
+		}
+		else
+		{
+			n = "1";
+		}
+        geneList[geneIndex].binaryGene.Remove(bitIndex, 1);
+        geneList[geneIndex].binaryGene.Insert(bitIndex, "0");
     }
 
 }

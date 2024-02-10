@@ -6,6 +6,7 @@ public static class Globals
 {
     public static int FrameRate = 100;
     public static int WORLD_SIZE = 128;
+    public static double mutationProbablity = 1;
     public static int stepsPerGeneration = 100;
     public static int numberOfOrganisms = 1000;
     public static int numberOfInputSensors = 8;

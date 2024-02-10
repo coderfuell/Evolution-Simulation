@@ -43,6 +43,10 @@ public class Organism
 
     public Organism getChild()
     {
+        if (Globals.probabilityFunction(Globals.mutationProbablity) > 0)
+        {
+            this.genome.mutation();
+        }
         Organism org = new Organism(this);
         return org;
     }

@@ -9,7 +9,10 @@ public class Survival
     {
         if (org.loc.y <= Globals.WORLD_SIZE / 2)
         {
-            return true;
+            if (org.loc.x <= Globals.WORLD_SIZE / 2)
+            {
+                return true;
+            }
         }
         return false;
     }
