@@ -32,11 +32,13 @@ public class Gene
 public class Genome
 {
 	public Gene [] geneList = new Gene[Globals.GenomeLength];
+	public string genomestring = "";
 	public Genome()
 	{
 		for (int i = 0;i < Globals.GenomeLength;i++)
 		{
 			geneList[i] = new Gene();
+			genomestring += geneList[i].gene;
 		}
 	}
 

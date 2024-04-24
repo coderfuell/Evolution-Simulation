@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Organism_behaviour : MonoBehaviour
@@ -24,11 +25,13 @@ public class Organism_behaviour : MonoBehaviour
     {
         displayControl();
         Globals.setWorldtoZero();
+        DateTime currentTime = DateTime.Now;
         for (int i = 0; i < Globals.numberOfOrganisms; i++)
         {
             Organism organism = new Organism(prefab);
             Globals.organisms.Add(organism);
         }
+        //StreamWriter writer = new StreamWriter("C:\\Users\\deepe\\Evolution Sim\\Geneticdata.txt");
     }
 
     // Update is called once per frame
@@ -41,15 +44,29 @@ public class Organism_behaviour : MonoBehaviour
             Globals.organisms[i].brain.processOutput();
             (float x, float y) = (Globals.organisms[i].loc.x, Globals.WORLD_SIZE - Globals.organisms[i].loc.y - 1);
             Globals.organisms[i].prefab.transform.position = new Vector3(x, y, 0);
-            //Globals.organisms[i].genome.mutation();
+            Globals.organisms[i].genome.mutation();
         }
         nextGen++;
         if (nextGen > Globals.stepsPerGeneration)
         {
-            Survival.PlaceholderName();
+            Survival.GotoNextGen();
             nextGen = 0;
             genNumber++;
             Debug.Log(genNumber);
+            if (genNumber % 5 == 0)
+            {
+                System.Random rand = new System.Random();
+                string line;
+                line = genNumber.ToString() + ", " + Globals.organisms[rand.Next(Globals.numberOfOrganisms)].genome.genomestring;
+                //StreamWriter writer = new StreamWriter("C:\\Users\\deepe\\Evolution Sim\\Geneticdata.txt");
+                //while (!string.IsNullOrWhiteSpace(line))
+                //{
+                //writer.WriteLine(line);
+                //}
+                Debug.Log(line);
+            }
         }
     }
+
 }
+
